@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luna / Terra / Sol / Astra 怎么选？GPT-6.1 家族定位一次看清</title>
+<meta name="description" content="GPT-6.1 Terra / Sol / Luna / Astra 中文选型与上手指南">
+<style>
+:root {
+  --bg: #0f1419;
+  --card: #1a2332;
+  --text: #e7ecf3;
+  --muted: #9aa8bc;
+  --accent: #5b9fd4;
+  --accent2: #7dd3a7;
+  --border: #2a3548;
+  --code-bg: #0d1117;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(160deg, #0f1419 0%, #152033 50%, #0f1419 100%);
+  color: var(--text);
+  line-height: 1.75;
+  min-height: 100vh;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; color: #7eb8e8; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+header.site {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .75rem 1.25rem;
+  padding-bottom: 1.25rem; margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+header.site .brand { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+header.site nav a { color: var(--muted); margin-right: 1rem; font-size: .95rem; }
+header.site nav a:hover { color: var(--accent); }
+.hero {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  margin-bottom: 2rem;
+}
+.hero h1 { margin: 0 0 .75rem; font-size: 1.75rem; line-height: 1.35; }
+.hero p { margin: 0; color: var(--muted); }
+.cards { display: grid; gap: 1rem; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.35rem 1.5rem;
+  transition: border-color .15s, transform .15s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card .tag {
+  display: inline-block;
+  font-size: .75rem;
+  padding: .15rem .55rem;
+  border-radius: 999px;
+  background: rgba(91,159,212,.15);
+  color: var(--accent);
+  margin-bottom: .5rem;
+}
+.card h2 { margin: 0 0 .5rem; font-size: 1.15rem; }
+.card h2 a { color: var(--text); }
+.card h2 a:hover { color: var(--accent); }
+.card p { margin: 0; color: var(--muted); font-size: .95rem; }
+.article {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem 1.75rem 2.5rem;
+}
+.article h1 { margin-top: 0; font-size: 1.65rem; line-height: 1.35; }
+.article h2 {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 1.25rem;
+}
+.article h3 { margin-top: 1.5rem; font-size: 1.05rem; color: var(--accent2); }
+.article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin: 1rem 0;
+  display: block;
+}
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: .92rem;
+  overflow-x: auto;
+  display: block;
+}
+.article th, .article td {
+  border: 1px solid var(--border);
+  padding: .55rem .7rem;
+  text-align: left;
+  vertical-align: top;
+}
+.article th { background: rgba(91,159,212,.12); }
+.article code {
+  background: var(--code-bg);
+  padding: .1rem .35rem;
+  border-radius: 4px;
+  font-size: .88em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.article pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+}
+.article pre code { padding: 0; background: none; }
+.article blockquote {
+  margin: 1rem 0;
+  padding: .5rem 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+  background: rgba(91,159,212,.06);
+}
+.article ul, .article ol { padding-left: 1.35rem; }
+.article hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+.appendix {
+  margin-top: 2rem;
+  padding: 1rem 1.1rem;
+  background: var(--code-bg);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .85rem;
+  white-space: pre-wrap;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.note {
+  margin-top: 1.5rem;
+  padding: .85rem 1rem;
+  background: rgba(125,211,167,.08);
+  border: 1px solid rgba(125,211,167,.25);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+footer {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .85rem;
+}
+.back { display: inline-block; margin-bottom: 1rem; color: var(--muted); }
+@media (max-width: 640px) {
+  .hero h1, .article h1 { font-size: 1.35rem; }
+  .wrap { padding: 1.25rem 1rem 3rem; }
+  .article, .hero { padding: 1.25rem 1rem; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <a class="brand" href="https://Maynor996.github.io/gpt61-terra-sol-luna-guide/">GPT-6.1 选型指南</a>
+  <nav>
+    <a href="https://Maynor996.github.io/gpt61-terra-sol-luna-guide/01-terra/">Terra</a>
+    <a href="https://Maynor996.github.io/gpt61-terra-sol-luna-guide/02-sol-vs-terra/">Sol vs Terra</a>
+    <a href="https://Maynor996.github.io/gpt61-terra-sol-luna-guide/03-family/">家族选型</a>
+  </nav>
+</header>
+
+<a class="back" href="https://Maynor996.github.io/gpt61-terra-sol-luna-guide/">← 返回目录</a>
+<article class="article">
+<h1>Luna / Terra / Sol / Astra 怎么选？GPT-6.1 家族定位一次看清</h1>
+<p>搜 <strong>luna terra sol</strong>、<strong>sol vs astra</strong>、<strong>sol release</strong> 时，信息往往散落在多篇官宣里。本文把 <strong>GPT-6 / GPT-6.1</strong> 家族四档——<strong>Luna、Terra、Sol、Astra</strong>——按定位、价位、适用场景串成一份选型笔记，方便做默认模型与分流策略。</p>
+<p>开放范围、价目、是否出现在 Chat / Work / Codex / API，一律 <strong>以 ChatGPT / API 当日开放为准</strong>；不确定具体日历日时不编造上线日期。</p>
+<p><img alt="OpenAI 模型家族相关官宣示意" src="./02-openai.jpg" /></p>
+<hr />
+<h2>1. 家族地图（从轻到强）</h2>
+<table>
+<thead>
+<tr>
+<th>档位</th>
+<th>常见型号示例</th>
+<th>一句话定位</th>
+<th>API 名示例（以文档为准）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Luna</strong></td>
+<td>GPT-6 Luna</td>
+<td>最轻量、最便宜的日常与高吞吐</td>
+<td><code>gpt-6-luna</code></td>
+</tr>
+<tr>
+<td><strong>Terra</strong></td>
+<td>GPT-6.1 Terra</td>
+<td>看屏 / computer use / 日常 Agent 的性价比默认档</td>
+<td><code>gpt-6.1-terra</code></td>
+</tr>
+<tr>
+<td><strong>Sol</strong></td>
+<td>GPT-6.1 Sol（及 GPT-6 Sol）</td>
+<td>近旗舰的复杂工作与编码，价格明显低于 Astra</td>
+<td><code>gpt-6.1-sol</code> / <code>gpt-6-sol</code></td>
+</tr>
+<tr>
+<td><strong>Astra</strong></td>
+<td>GPT-6 Astra</td>
+<td>旗舰：最强深度与对齐取向的兜底</td>
+<td><code>gpt-6-astra</code></td>
+</tr>
+</tbody>
+</table>
+<p>记忆口诀：<strong>Luna 跑量 → Terra 干活 → Sol 攻坚 → Astra 封顶。</strong></p>
+<hr />
+<h2>2. 价目阶梯（公开口径）</h2>
+<p><img alt="家族价目示意（截图仅供对照，以官网当日为准）" src="./01-pricing.jpg" /></p>
+<p>标准 API 公开价摘要（每 1M tokens，<strong>可能调整，以官网为准</strong>）：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Input</th>
+<th>Output</th>
+<th>选型含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT-6 Astra</td>
+<td>~$10</td>
+<td>~$50</td>
+<td>最贵；难题与高风险交付</td>
+</tr>
+<tr>
+<td>GPT-6.1 Sol</td>
+<td>~$2</td>
+<td>~$10</td>
+<td>公开口径：<strong>near-Astra，约 1/5 价</strong></td>
+</tr>
+<tr>
+<td>GPT-6.1 Terra</td>
+<td>~$1</td>
+<td>~$5</td>
+<td>公开口径：相对 Astra 约 <strong>1/10</strong> token 单价量级</td>
+</tr>
+<tr>
+<td>GPT-6 Luna</td>
+<td>~$0.10</td>
+<td>~$0.50</td>
+<td>海量简单请求、预过滤、草稿</td>
+</tr>
+</tbody>
+</table>
+<p>Work / Codex 若按额度计量：同一套餐下，选更轻的档通常能多跑任务——具体仍看官方说明与你的用量报告。</p>
+<hr />
+<h2>3. 各档展开：什么时候用</h2>
+<h3>Luna：跑量与分流</h3>
+<ul>
+<li>分类、抽取、短回复、简单改写、高 QPS 网关前置。  </li>
+<li>作为「贵模型之前的过滤器」：Luna 做完再决定是否升级到 Terra / Sol。  </li>
+<li>不指望它稳定完成长链路 computer use 或大重构。</li>
+</ul>
+<h3>Terra（重点关注 GPT-6.1 Terra）：默认工人</h3>
+<ul>
+<li>视觉理解 + 精确一点的电脑操作 + 更自然写作，是官方给 6.1 Terra 的主打组合。  </li>
+<li>适合：填表、对图操作、日常 Codex、多数业务 Agent。  </li>
+<li>相对 <strong>GPT-5.6 Terra</strong>：官方在 Agents’ Last Exam 等评测上给出明显提升主张——仍请按「公开主张」理解，并用自有任务验收。  </li>
+<li>复杂编码封顶时，官方也提示可改走 Sol / Astra。</li>
+</ul>
+<h3>Sol：近旗舰攻坚（含 sol release / 可用性说明）</h3>
+<ul>
+<li>公开定位接近 Astra 的专业工作、编码、computer use，但成本低一截。  </li>
+<li><strong>可用性</strong>：Sol / 6.1 Sol 出现在 Chat、Work、Codex、API 的哪些表面，<strong>以 ChatGPT / API 当日开放为准</strong>；历史上存在「先在 Work / Codex / API，Chat 侧逐步放开」的情况，<strong>请勿把不确定的具体日历日写进生产配置假设</strong>。  </li>
+<li>API 侧常见 ID：<code>gpt-6.1-sol</code>（以文档列表为准）。  </li>
+<li>当你已经用 Terra「能做但不稳」时，Sol 往往是下一档，而不是直接跳 Astra。</li>
+</ul>
+<h3>Astra：封顶与兜底</h3>
+<ul>
+<li>最难推理、最高风险交付、需要旗舰对齐与深度的任务。  </li>
+<li>适合作为「升级路径的最后一跳」或关键路径强制指定，而不是全部流量的默认模型。</li>
+</ul>
+<hr />
+<h2>4. 三组高频对比</h2>
+<h3>luna terra sol（怎么叠起来用）</h3>
+<pre><code class="language-text">请求进入
+  ├─ 简单 / 可缓存 → Luna
+  ├─ 常规 Agent / 看屏 / 日常编码 → Terra
+  └─ 失败重试或标记为 hard → Sol（仍失败 → Astra）
+</code></pre>
+<h3>sol vs astra</h3>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>更稳妥的答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>能不能用 Sol 代替 Astra？</td>
+<td>多数非极端任务可以先试；公开口径称 Sol 近 Astra、约 1/5 价</td>
+</tr>
+<tr>
+<td>什么时候必须 Astra？</td>
+<td>失败成本极高、内部规范要求旗舰、Sol 多次触顶</td>
+</tr>
+<tr>
+<td>价格直觉</td>
+<td>Astra 最贵；Sol 是「性价比旗舰感」常见选择</td>
+</tr>
+</tbody>
+</table>
+<h3>sol release（上线与看到与否）</h3>
+<p>不要写死「某月某日一定全量可见」。实操核对清单：</p>
+<ol>
+<li>ChatGPT 模型选择器（Chat / Work 分开看）  </li>
+<li>Codex 桌面或 Cloud 的模型列表  </li>
+<li>API 控制台模型列表与文档定价页  </li>
+<li>客户端是否已更新到支持该模型的版本  </li>
+</ol>
+<p>任一项当日不可见，都先当「未对你的账号/区域开放」，而不是配置写错唯一可能。</p>
+<hr />
+<h2>5. 场景速查表</h2>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>优先</th>
+<th>备选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客服草稿 / 字段抽取 / 高 QPS</td>
+<td>Luna</td>
+<td>Terra</td>
+</tr>
+<tr>
+<td>看屏填表、多步业务 Agent</td>
+<td>Terra</td>
+<td>Sol</td>
+</tr>
+<tr>
+<td>大重构、难 bug、长 Codex 任务</td>
+<td>Sol</td>
+<td>Astra</td>
+</tr>
+<tr>
+<td>关键交付、最终质检</td>
+<td>Astra</td>
+<td>Sol 人工复核</td>
+</tr>
+<tr>
+<td>还在用 5.6 Terra</td>
+<td>先试 6.1 Terra</td>
+<td>不够再上 Sol</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>6. 小结</h2>
+<ul>
+<li><strong>Luna / Terra / Sol / Astra</strong> 是一条清晰的成本—能力阶梯，而不是四个互斥「信仰」。  </li>
+<li>搜 <strong>luna terra sol</strong> 时，先定默认档（多数团队会落在 Terra），再用 Sol / Astra 做升级路径。  </li>
+<li><strong>sol vs astra</strong>：公开口径下 Sol 提供近旗舰体验与约 1/5 价；是否替下 Astra 用你的失败成本说话。  </li>
+<li><strong>sol release / 可见性</strong>：以 ChatGPT 与 API <strong>当日开放</strong>为准，不编造具体日历日。  </li>
+</ul>
+<p>价目与评测主张均可能更新；上线前再核对官方文档与价目页。本文仅供选型整理。</p>
+<hr /><div class="appendix">附：本地对照环境（可选）
+直连不稳或只想先摸手感时，可自行复制下列入口做对照（纯文本）：
+网页对话对照：https://trygpt.asia/list/#/home
+包月额度对照：https://momoai.asia/home
+多模型 API 对照：https://tryallapi.com/
+订阅路径对照：https://chongzhi.trygpt.asia/
+与官方无关；价格以各页当日为准。</div>
+</article>
+
+<footer>
+  <p>内容整理自公开资料；功能、价格与开放范围以 OpenAI 官方当日说明为准。</p>
+  <p>GitHub Pages 镜像 · CSDN 等平台转载标题/正文可能微调 · <a href="https://github.com/Maynor996/gpt61-terra-sol-luna-guide">仓库源码</a></p>
+</footer>
+</div>
+</body>
+</html>

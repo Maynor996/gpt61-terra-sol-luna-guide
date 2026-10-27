@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPT-6.1 Terra 是什么？ChatGPT Work / Codex / API 怎么用上</title>
+<meta name="description" content="GPT-6.1 Terra / Sol / Luna / Astra 中文选型与上手指南">
+<style>
+:root {
+  --bg: #0f1419;
+  --card: #1a2332;
+  --text: #e7ecf3;
+  --muted: #9aa8bc;
+  --accent: #5b9fd4;
+  --accent2: #7dd3a7;
+  --border: #2a3548;
+  --code-bg: #0d1117;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(160deg, #0f1419 0%, #152033 50%, #0f1419 100%);
+  color: var(--text);
+  line-height: 1.75;
+  min-height: 100vh;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; color: #7eb8e8; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+header.site {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .75rem 1.25rem;
+  padding-bottom: 1.25rem; margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+header.site .brand { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+header.site nav a { color: var(--muted); margin-right: 1rem; font-size: .95rem; }
+header.site nav a:hover { color: var(--accent); }
+.hero {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  margin-bottom: 2rem;
+}
+.hero h1 { margin: 0 0 .75rem; font-size: 1.75rem; line-height: 1.35; }
+.hero p { margin: 0; color: var(--muted); }
+.cards { display: grid; gap: 1rem; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.35rem 1.5rem;
+  transition: border-color .15s, transform .15s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card .tag {
+  display: inline-block;
+  font-size: .75rem;
+  padding: .15rem .55rem;
+  border-radius: 999px;
+  background: rgba(91,159,212,.15);
+  color: var(--accent);
+  margin-bottom: .5rem;
+}
+.card h2 { margin: 0 0 .5rem; font-size: 1.15rem; }
+.card h2 a { color: var(--text); }
+.card h2 a:hover { color: var(--accent); }
+.card p { margin: 0; color: var(--muted); font-size: .95rem; }
+.article {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem 1.75rem 2.5rem;
+}
+.article h1 { margin-top: 0; font-size: 1.65rem; line-height: 1.35; }
+.article h2 {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 1.25rem;
+}
+.article h3 { margin-top: 1.5rem; font-size: 1.05rem; color: var(--accent2); }
+.article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin: 1rem 0;
+  display: block;
+}
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: .92rem;
+  overflow-x: auto;
+  display: block;
+}
+.article th, .article td {
+  border: 1px solid var(--border);
+  padding: .55rem .7rem;
+  text-align: left;
+  vertical-align: top;
+}
+.article th { background: rgba(91,159,212,.12); }
+.article code {
+  background: var(--code-bg);
+  padding: .1rem .35rem;
+  border-radius: 4px;
+  font-size: .88em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.article pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+}
+.article pre code { padding: 0; background: none; }
+.article blockquote {
+  margin: 1rem 0;
+  padding: .5rem 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+  background: rgba(91,159,212,.06);
+}
+.article ul, .article ol { padding-left: 1.35rem; }
+.article hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+.appendix {
+  margin-top: 2rem;
+  padding: 1rem 1.1rem;
+  background: var(--code-bg);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .85rem;
+  white-space: pre-wrap;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.note {
+  margin-top: 1.5rem;
+  padding: .85rem 1rem;
+  background: rgba(125,211,167,.08);
+  border: 1px solid rgba(125,211,167,.25);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+footer {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .85rem;
+}
+.back { display: inline-block; margin-bottom: 1rem; color: var(--muted); }
+@media (max-width: 640px) {
+  .hero h1, .article h1 { font-size: 1.35rem; }
+  .wrap { padding: 1.25rem 1rem 3rem; }
+  .article, .hero { padding: 1.25rem 1rem; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <a class="brand" href="https://Maynor996.github.io/gpt61-terra-sol-luna-guide/">GPT-6.1 选型指南</a>
+  <nav>
+    <a href="https://Maynor996.github.io/gpt61-terra-sol-luna-guide/01-terra/">Terra</a>
+    <a href="https://Maynor996.github.io/gpt61-terra-sol-luna-guide/02-sol-vs-terra/">Sol vs Terra</a>
+    <a href="https://Maynor996.github.io/gpt61-terra-sol-luna-guide/03-family/">家族选型</a>
+  </nav>
+</header>
+
+<a class="back" href="https://Maynor996.github.io/gpt61-terra-sol-luna-guide/">← 返回目录</a>
+<article class="article">
+<h1>GPT-6.1 Terra 是什么？ChatGPT Work / Codex / API 怎么用上</h1>
+<p>最近搜索里常出现 <strong>gpt 6.1 terra</strong>、<strong>gpt 6 terra</strong> 这类关键词。简单说：<strong>GPT-6.1 Terra</strong> 是 OpenAI 面向「会干活」场景（看屏、跨应用操作、日常公文与轻量工程）推的一档偏性价比模型；在 API 里模型 ID 为 <strong><code>gpt-6.1-terra</code></strong>。本文按教程口吻，只讲它是什么、在 ChatGPT Work / Codex / API 里怎么用上，以及怎么自己验手感。</p>
+<p>功能、开放范围、价格一律<strong>以 OpenAI 官方当日说明为准</strong>；文中公开口径仅作上手对照。</p>
+<p><img alt="OpenAI 官宣 GPT-6.1 Terra" src="./01-openai.jpg" /></p>
+<hr />
+<h2>1. GPT-6.1 Terra 定位一句话</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>公开口径（摘要）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>产品定位</td>
+<td>更快、更省的 computer use / 视觉推理 + 更自然写作</td>
+</tr>
+<tr>
+<td>相对上一代</td>
+<td>相对 <strong>GPT-5.6 Terra</strong> 有明显提升（官方在 Agents’ Last Exam 等评测上给出对比）</td>
+</tr>
+<tr>
+<td>相对旗舰</td>
+<td>官方称在部分 Agent 任务上可与 <strong>GPT-6 Astra</strong> 中等努力档接近，且 <strong>token 单价约为 Astra 的约 1/10</strong>（公开口径，以官网价目为准）</td>
+</tr>
+<tr>
+<td>入口</td>
+<td>ChatGPT <strong>Work</strong>、<strong>Codex</strong>；API：<code>gpt-6.1-terra</code></td>
+</tr>
+</tbody>
+</table>
+<p>适合先试的人：已经在用 Work / Codex 跑多步任务、或自建 Agent 看截图/点界面的开发者。不适合把它当成「最强一切」——复杂编码、极致推理仍可能要上 Sol / Astra。</p>
+<hr />
+<h2>2. Agents’ Last Exam：怎么理解官方说法</h2>
+<p>公开材料里，OpenAI 用 <strong>Agents’ Last Exam</strong>（面向专业电脑工作流的 Agent 评测）介绍 Terra，例如把建筑图纸做成 3D、逐镜头审片并写时间码日志这类任务。</p>
+<p>需要<strong>小心表述</strong>的几点：</p>
+<ol>
+<li>分数与成本是 <strong>OpenAI 自己跑出来的公开主张</strong>，不是第三方独立复现结论。  </li>
+<li>「与 Astra 持平」类表述通常对应<strong>某一努力档、某一套评测</strong>，不要外推成「全面持平」。  </li>
+<li>「更快 / 更省」指该评测语境下的任务完成效率与估算费用，不等于任意场景的 tokens/秒。</li>
+</ol>
+<p>上手建议：把官方图表当<strong>选型线索</strong>，用你自己的 3～5 个真实任务做 A/B，再决定默认档。</p>
+<hr />
+<h2>3. ChatGPT Work：怎么切到 Terra</h2>
+<ol>
+<li>使用已开通 Plus / Pro / Enterprise / Edu 等相应权益的账号（以你订阅页当日为准）。  </li>
+<li>打开 <strong>ChatGPT Work</strong>（偏多步交付、可调用工具的工作流，而不是普通闲聊 Chat）。  </li>
+<li>在模型选择器里找到 <strong>GPT-6.1 Terra</strong>（界面文案可能写作 GPT-6.1 Terra / Terra，以客户端为准）。  </li>
+<li><strong>新开一轮</strong>再测，避免旧线程上下文干扰对比。</li>
+</ol>
+<p>第一次验收用「真实任务」，例如：</p>
+<ul>
+<li>给一张界面/产品参考图，让它在可用工具里完成填表、改文件、导出步骤；  </li>
+<li>或：读一份短文档 → 提取字段 → 按模板输出可直接粘贴的结果。</li>
+</ul>
+<p><img alt="社区演示：Terra 看屏完成持续操作类任务" src="./02-tibo.jpg" /></p>
+<p>上图这类「对着参考持续操作」的流程，比空问「你是谁」更能看出 gpt 6 terra 与上一代的差别。</p>
+<hr />
+<h2>4. Codex：工程向怎么用上</h2>
+<p>Codex（桌面 / Cloud 等入口以你当前客户端为准）面向写代码、改仓库、命令行任务：</p>
+<ol>
+<li>更新到支持新模型的 Codex / ChatGPT Desktop 版本。  </li>
+<li>在任务或会话的模型列表中选择 <strong>GPT-6.1 Terra</strong>。  </li>
+<li>用同一仓库任务对比：定位 bug → 改代码 → 说明改动文件；记录是否一次做完、是否乱改范围。</li>
+</ol>
+<p>官方也提到：对<strong>最复杂</strong>的编码任务，<strong>GPT-6.1 Sol</strong> 与 <strong>GPT-6 Astra</strong> 往往仍更合适。Terra 更适合当成「日常工程吞吐默认档」来试，而不是唯一答案。</p>
+<hr />
+<h2>5. API：模型 ID 与调用注意</h2>
+<p>开发者在 OpenAI API 中：</p>
+<ul>
+<li><strong>model</strong>：<code>gpt-6.1-terra</code>  </li>
+<li>权限：控制台 / 文档当日模型列表为准  </li>
+<li>对比测试：固定 system、tools、reasoning effort，只换 model  </li>
+</ul>
+<p>示意（伪代码）：</p>
+<pre><code class="language-text">POST /v1/responses   # 或你当前使用的 Responses / Chat Completions 入口
+{
+  &quot;model&quot;: &quot;gpt-6.1-terra&quot;,
+  &quot;input&quot;: &quot;……你的任务……&quot;
+}
+</code></pre>
+<p>跑 computer-use / Agent 时，优先用<strong>能看截图、能调工具</strong>的链路测；纯文本补全很难反映 Terra 主打能力。<code>reasoning.effort</code> 公开文档支持从 <code>none</code> 到 <code>max</code> 等档位（以文档当日为准），验收时至少对比 medium 与更高档各一次。</p>
+<p>标准 API 公开价目示例（<strong>以官网当日为准</strong>）：约 <strong>$1 / 1M input</strong>、<strong>$5 / 1M output</strong>（另有 cached input 等细则）。</p>
+<hr />
+<h2>6. 五分钟验收清单</h2>
+<ul>
+<li>[ ] Work / Codex 模型列表能选到 GPT-6.1 Terra  </li>
+<li>[ ] API 用 <code>gpt-6.1-terra</code> 能正常返回  </li>
+<li>[ ] 至少完成 1 个「看屏 / 跨步骤」真实任务  </li>
+<li>[ ] 与当前默认模型（如 Sol 或 5.6 Terra）同任务对比耗时与费用  </li>
+<li>[ ] 记下失败样例：拒操作、看错控件、中途停，便于改 prompt / 工具描述  </li>
+</ul>
+<hr />
+<h2>7. 小结</h2>
+<p><strong>GPT-6.1 Terra（<code>gpt-6.1-terra</code>）</strong> 更适合当作 Agent / computer-use / Codex 日常干活的默认候选：网页端走 ChatGPT Work 与 Codex，开发者走 API。先用同一任务对比完成率、耗时、账单，再决定是否替换现有默认档。</p>
+<p>Agents’ Last Exam 等数字请按「公开主张、场景相关」理解；一切以 OpenAI 官方当日页面为准。本文只做上手整理，不构成对任何第三方服务的背书。</p>
+<hr /><div class="appendix">附：本地对照环境（可选）
+直连不稳或只想先摸手感时，可自行复制下列入口做对照（纯文本）：
+网页对话对照：https://trygpt.asia/list/#/home
+包月额度对照：https://momoai.asia/home
+多模型 API 对照：https://tryallapi.com/
+订阅路径对照：https://chongzhi.trygpt.asia/
+与官方无关；价格以各页当日为准。</div>
+</article>
+
+<footer>
+  <p>内容整理自公开资料；功能、价格与开放范围以 OpenAI 官方当日说明为准。</p>
+  <p>GitHub Pages 镜像 · CSDN 等平台转载标题/正文可能微调 · <a href="https://github.com/Maynor996/gpt61-terra-sol-luna-guide">仓库源码</a></p>
+</footer>
+</div>
+</body>
+</html>
